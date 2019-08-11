@@ -1,4 +1,3 @@
-// Your web app's Firebase configuration
 var firebaseConfig = {
     apiKey: "AIzaSyAxfN7NqTsQpNF9H_o3MFU6RERarbF4KM0",
     authDomain: "train-scheduler-836ae.firebaseapp.com",
@@ -7,9 +6,9 @@ var firebaseConfig = {
     storageBucket: "",
     messagingSenderId: "450162581972",
     appId: "1:450162581972:web:9c6532086c05fbb4"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
@@ -57,13 +56,19 @@ database.ref().on("child_added", function(childSnapshot) {
     console.log(trStart);
     console.log(trRate);
     
-    var nextTr = moment(trStart, "h:mm a").diff(moment(), "minutes");
-    console.log(nextTr)
+    var nextTr = moment(trStart, "h:mm a").add(trRate, "minutes");
+
+    var minAway = moment(nextTr, "hh:mm a").diff(moment(), "minutes");
+    console.log(nextTr);
+    console.log(minAway)
     var newRow = $("<tr>").append(
         $("<td>").text(trName),
         $("<td>").text(trDest),
         $("<td>").text(trRate),
+        $("<td>").text(nextTr),
+        $("<td>").text(minAway)
     );
 
+    $("#train-table > tbody").append(newRow);
 
 })
