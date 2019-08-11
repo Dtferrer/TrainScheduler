@@ -56,5 +56,14 @@ database.ref().on("child_added", function(childSnapshot) {
     console.log(trRole);
     console.log(trStart);
     console.log(trRate);
-  
+    
+    var nextTr = moment(trStart, "h:mm a").diff(moment(), "minutes");
+    console.log(nextTr)
+    var newRow = $("<tr>").append(
+        $("<td>").text(trName),
+        $("<td>").text(trDest),
+        $("<td>").text(trRate),
+    );
+
+
 })
